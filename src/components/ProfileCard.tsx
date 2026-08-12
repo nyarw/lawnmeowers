@@ -46,10 +46,10 @@ export default function ProfileCard({
 	const mainDiv = `${
 		expand
 			? "w-3xl items-start"
-			: "min-w-max cursor-pointer hover:scale-105 transition-transform duration-200"
-	} min-h-max inline-flex m-2 flex-col items-center justify-center p-6 border-ctp-surface0 border rounded-3xl bg-ctp-base`;
+			: "w-max min-w-120 max-w-1/2 cursor-pointer hover:scale-105 transition-transform duration-200"
+	} min-h-max inline-flex m-2 flex-col items-center justify-top p-6 border-ctp-surface0 border rounded-3xl bg-ctp-base relative`;
 
-	const layoutUpper = `${expand ? "items-start w-full" : "items-center"} gap-5 flex relative`;
+	const layoutUpper = `${expand ? "items-start" : "items-center"} w-full gap-5 flex relative`;
 	const layoutTopRight = expand
 		? "flex flex-col flex-1 self-stretch"
 		: "contents";
@@ -72,7 +72,7 @@ export default function ProfileCard({
 					<ActivityDisplay expand={expand} presence={presence} />
 				</div>
 
-				{expand && <FullRoles profile={profile} />}
+				<Roles expand={expand} profile={profile} />
 			</div>
 
 			<span className="bg-ctp-surface1 w-[95%] m-4 h-px self-center" />
@@ -83,8 +83,8 @@ export default function ProfileCard({
 	);
 }
 
-function FullRoles({ profile }: { profile: Profile }) {
-	return (
+function Roles({ expand, profile }: { expand: boolean; profile: Profile }) {
+	return expand ? (
 		<ul className="flex gap-2 absolute top-0 right-0 opacity-50 text-right">
 			{profile.roles.map((role) => (
 				<li key={role}>
@@ -99,6 +99,21 @@ function FullRoles({ profile }: { profile: Profile }) {
 				</li>
 			))}
 		</ul>
+	) : (
+		<span className="ml-auto mb-auto">
+			<p className="opacity-50" title={profile.roles.join(", ")}>
+				<Image
+					src={`/icons/roles/${profile.roles[0].toLowerCase()}.png`}
+					width={16}
+					height={16}
+					alt={profile.roles[0]}
+					className="inline-block"
+				/>
+				<span className="text-xs opacity-75 ml-1">
+					{profile.roles.length <= 1 ? "" : `+${profile.roles.length - 1}`}
+				</span>
+			</p>
+		</span>
 	);
 }
 
@@ -174,20 +189,6 @@ function UserInfo({
 
 	return (
 		<div className={expand ? "flex flex-col" : "flex flex-col pr-5"}>
-			{!expand && (
-				<p className="opacity-50" title={profile.roles.join(", ")}>
-					<Image
-						src={`/icons/roles/${profile.roles[0].toLowerCase()}.png`}
-						width={16}
-						height={16}
-						alt={profile.roles[0]}
-						className="inline-block"
-					/>
-					<span className="text-xs opacity-75 ml-1">
-						{profile.roles.length <= 1 ? "" : `+${profile.roles.length - 1}`}
-					</span>
-				</p>
-			)}
 			<h2 className={biggerOnExpand} style={nameStyle}>
 				{profile.displayName}
 			</h2>
@@ -201,7 +202,7 @@ function UserInfo({
 
 function Socials({ expand, profile }: { expand: boolean; profile: Profile }) {
 	return (
-		<ul className={expand ? "flex-col flex w-full" : ""}>
+		<ul className={expand ? "flex-col flex w-full" : "z-10"}>
 			{profile.socials.map((social) => (
 				<li key={social.platform} className={expand ? "block" : "inline-block"}>
 					<a
