@@ -62,11 +62,14 @@
 body {
 	font-family: "Sniglet", sans-serif;
 }
-h1,
-h2,
-h3,
-.big-font {
-	font-family: "Sakura", sans-serif;
+
+@layer base {
+	h1,
+	h2,
+	h3,
+	.big-font {
+		font-family: "Sakura", sans-serif;
+	}
 }
 
 ::selection {

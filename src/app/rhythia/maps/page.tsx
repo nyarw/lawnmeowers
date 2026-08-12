@@ -23,7 +23,7 @@ export default async function MapsPage() {
 										: "/defaults/cail.png"
 								}
 								alt={map.title}
-								sizes="256px"
+								sizes="1024px"
 								fill
 								priority
 								className="object-cover group-hover:scale-105 group-hover:brightness-55 duration-300"
