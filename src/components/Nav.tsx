@@ -7,7 +7,7 @@ import { useHash } from "@/hooks/useHash";
 export default function Nav() {
 	const animBottom =
 		"before:absolute before:-z-1 before:w-full before:bottom-0 before:left-0 before:h-0 hover:before:h-1 before:transition-h before:duration-200 before:bg-ctp-mauve";
-	const topbarThingButton = `relative z-0 w-1/8 min-w-max h-max hover:bg-ctp-base hover:text-ctp-text transition-border duration-100 ${animBottom}`; // let me tell you how much I HATE tailwind
+	const topbarThingButton = `relative z-0 w-1/8 min-w-max h-max hover:bg-ctp-base transition-border duration-100 ${animBottom}`; // let me tell you how much I HATE tailwind
 	const a = "size-full p-5 block";
 
 	const hash = useHash();
@@ -32,6 +32,11 @@ export default function Nav() {
 				<li className={thing("#founders")}>
 					<Link href="/#founders" className={a}>
 						founders
+					</Link>
+				</li>
+				<li className={thing("/rhythia/maps")}>
+					<Link href="/rhythia/maps" className={a}>
+						maps
 					</Link>
 				</li>
 				<li className={thing("#discord")}>
