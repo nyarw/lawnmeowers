@@ -7,22 +7,26 @@ export default async function MapsPage() {
 	const { maps } = await fetchMaps({ limit: "20" });
 
 	return (
-		<div className="container mx-auto max-w-340">
-			<section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+		<section className="container mx-auto max-w-270 mt-16">
+			<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
 				{maps.map((map) => (
-					<Link href={`/rhythia/maps/${map.id}`} key={map.id} className="block">
+					<Link
+						href={`/rhythia/maps/${map.id}`}
+						key={map.id}
+						className="group relative block"
+					>
 						<div className="relative aspect-square overflow-hidden rounded-2xl border-2 border-ctp-mauve">
 							<Image
 								src={
-									map.coverKey
-										? `https://rhythia-api.nyarw.moe/maps/${map.id}/cover`
+									map.coverUrl
+										? `https://rhythia-api.nyarw.moe${map.coverUrl}`
 										: "/defaults/cail.png"
 								}
 								alt={map.title}
 								sizes="256px"
 								fill
 								priority
-								className="object-cover hover:scale-105 hover:brightness-75 duration-300"
+								className="object-cover group-hover:scale-105 group-hover:brightness-55 duration-300"
 							></Image>
 							<div className="absolute inset-x-0 bottom-0 z-20 p-1">
 								<div className="rounded-2xl border border-ctp-mauve bg-ctp-surface0/75 p-2 backdrop-blur-sm">
@@ -60,7 +64,7 @@ export default async function MapsPage() {
 						</div>
 					</Link>
 				))}
-			</section>
-		</div>
+			</div>
+		</section>
 	);
 }

@@ -3,7 +3,7 @@ export interface Mapper {
 	name: string;
 }
 
-export interface Map {
+export interface MapData {
 	id: string;
 	legacyId: string | null;
 	title: string;
@@ -13,12 +13,15 @@ export interface Map {
 	difficultyName: string | null;
 	length: number;
 	noteCount: number;
-	coverKey: string | null;
 	createdAt: string;
+	updatedAt: string;
+	coverUrl: string | null;
+	audioUrl: string | null;
+	fileUrl: string;
 }
 
 export interface MapsResponse {
-	maps: Map[];
+	maps: MapData[];
 	total: number;
 	limit: number;
 	offset: number;
