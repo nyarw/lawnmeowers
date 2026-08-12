@@ -29,9 +29,11 @@ const ACTIVITY_TYPE: Record<number, string> = {
 export default function ProfileCard({
 	profile,
 	expand,
+	action,
 }: {
 	profile: Profile;
 	expand: boolean;
+	action?: () => void;
 }) {
 	const presence = usePresence(profile.discordId);
 
@@ -43,7 +45,7 @@ export default function ProfileCard({
 	// i am sorry for this. biome just makes it so unreadable when it puts those stupid new lines all over the html
 	const mainDiv = `${
 		expand
-			? "w-full max-w-3xl cursor items-start"
+			? "w-3xl items-start"
 			: "min-w-max cursor-pointer hover:scale-105 transition-transform duration-200"
 	} min-h-max inline-flex m-2 flex-col items-center justify-center p-6 border-ctp-surface0 border rounded-3xl bg-ctp-base`;
 
@@ -53,7 +55,14 @@ export default function ProfileCard({
 		: "contents";
 
 	return (
-		<div className={mainDiv}>
+		// biome-ignore lint/a11y/noStaticElementInteractions: ts linter wont stop complaining 🥀
+		<div
+			className={mainDiv}
+			onClick={expand ? undefined : action}
+			onKeyDown={expand ? undefined : (e) => e.key === "Enter" && action?.()}
+			role={expand ? undefined : "button"}
+			tabIndex={expand ? undefined : 0}
+		>
 			<div className={layoutUpper}>
 				<UserIcon expand={expand} profile={profile} presence={presence} />
 
@@ -198,6 +207,7 @@ function Socials({ expand, profile }: { expand: boolean; profile: Profile }) {
 					<a
 						href={social.url}
 						target="_blank"
+						onClick={(e) => e.stopPropagation()}
 						className="bg-ctp-surface0 hover:bg-ctp-surface2 transition-background-color duration-100 hover:scale-y-104 hover:scale-x-102 rounded-full border-ctp-surface2 border m-1 p-1.5 flex gap-2 items-center"
 					>
 						<Image

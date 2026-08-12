@@ -21,33 +21,37 @@ export const metadata: Metadata = {
 	description: "",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+	children,
+	modal,
+}: LayoutProps<"/"> & { modal: React.ReactNode }) {
 	return (
 		<html
 			lang="en"
 			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
 			suppressHydrationWarning
 		>
-			<head>
-				<script
+			<body className="min-h-full flex flex-col bg-ctp-base dark:bg-ctp-crust text-ctp-text">
+				<Script
+					id="theme-detect"
+					strategy="beforeInteractive"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: its safe cause static
 					dangerouslySetInnerHTML={{
 						__html: `
-						(function() {
-							function apply(isDark) {
-								document.documentElement.classList.toggle('mocha', isDark);
-							}
-							var mq = window.matchMedia('(prefers-color-scheme: dark)');
-							apply(mq.matches);
-							mq.addEventListener('change', function(e) { apply(e.matches); });
-						})();
-					`,
+							(function() {
+								function apply(isDark) {
+									document.documentElement.classList.toggle('mocha', isDark);
+								}
+								var mq = window.matchMedia('(prefers-color-scheme: dark)');
+								apply(mq.matches);
+								mq.addEventListener('change', function(e) { apply(e.matches); });
+							})();
+						`,
 					}}
 				/>
-			</head>
-			<body className="min-h-full flex flex-col bg-ctp-base dark:bg-ctp-crust text-ctp-text">
 				<Nav />
 				{children}
+				{modal}
 
 				<Script
 					src="/oneko.js"
