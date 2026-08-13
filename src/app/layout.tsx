@@ -18,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
 	title: "Lawn Meowers Council",
-	description: "",
+	description: "The home of the Lawn Meowers Council",
+	manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
