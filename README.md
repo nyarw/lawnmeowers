@@ -12,6 +12,8 @@ public/avatars/username.png
 
 Supported formats: `.png`, `.jpg`, `.jpeg`, `.webp`, `.gif`.
 
+If you don't upload an avatar, it will use your discord avatar.
+
 ## 2. Add yourself to the JSON
 
 Open `src/data/profiles.json` and add your profile to the array:
