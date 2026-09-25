@@ -197,6 +197,31 @@
 					"url": "https://www.roblox.com/users/3268156812/profile"
 				}
 			]
+		},
+		{
+			"username": "cake",
+			"displayName": "cake",
+			"bio": "i like cake with no icing",
+			"roles": ["Member"],
+			"discordId": "1078313475727691787",
+			"showPresence": true,
+			"socials": [
+				{
+					"platform": "github",
+					"handle": "ILikeCakeWithNoIcing",
+					"url": "https://github.com/ILikeCakeWithNoIcing"
+				},
+				{
+					"platform": "website",
+					"handle": "reallysilly.lol",
+					"url": "https://reallysilly.lol"
+				},
+				{
+					"platform": "roblox",
+					"handle": "ILikeCakeWithNoIcing",
+					"url": "https://www.roblox.com/users/178248663178248663/profile"
+				}
+			]
 		}
 	]
 }
